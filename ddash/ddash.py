@@ -277,14 +277,6 @@ class DDash:
         cls._print(cls.__doc__)
 
     @classmethod
-    def _stdout(cls, output, tag=None, end='\n'):
-        header = str()
-        if tag:
-            badge = f' [{tag.upper()}] '
-            header = f'{ColorTag.ON_CYAN}{badge:-^{cls._TERMINAL_SIZE_WIDTH}}{ColorTag.RESET}\n'
-        cls._print(f'{header}{output}', end=end)
-
-    @classmethod
     def _stderr(cls, output, tag=None, end='\n'):
         header = str()
         if tag:
@@ -298,19 +290,7 @@ class DDash:
 
     @classmethod
     def _exec(cls, cmd):
-        try:
-            timeout = int(cls._TIMEOUT) if cls._TIMEOUT and cls._TIMEOUT.isdigit() else None
-            output = subprocess.check_output(
-                cmd,
-                stderr=subprocess.STDOUT,
-                shell=True,
-                timeout=timeout,
-                universal_newlines=True,
-            )
-        except subprocess.CalledProcessError as e:
-            cls._stderr(output=e.output, tag='error')
-        else:
-            return output
+        subprocess.Popen(cmd, shell=True).wait()
 
     @classmethod
     def _ps(cls, args):
@@ -318,8 +298,7 @@ class DDash:
         cmd = f'docker ps --format "{format_}"'
         if args.pattern:
             cmd = f'{cmd} | grep \'{args.pattern}\''
-        stdout = cls._exec(cmd=cmd)
-        cls._stdout(output=stdout)
+        cls._exec(cmd=cmd)
 
     @classmethod
     def _extract_prefix(cls, project):
@@ -365,8 +344,7 @@ class DDash:
         if args.attach:
             subprocess.Popen(cmd, shell=True).wait()
         cmd = f'{cmd} -d'
-        stdout = cls._exec(cmd=cmd)
-        cls._stdout(output=stdout)
+        cls._exec(cmd=cmd)
 
     @classmethod
     def _terminate(cls, args):
@@ -380,8 +358,7 @@ class DDash:
         compose_filename = args.file or cls._COMPOSE_FILENAME
         satellite_project_pathname = os.path.join(root_path, *sub_path, satellite_project, compose_filename)
         cmd = f'docker-compose -f "{satellite_project_pathname}" down'
-        stdout = cls._exec(cmd=cmd)
-        cls._stdout(output=stdout)
+        cls._exec(cmd=cmd)
 
     @classmethod
     def _up(cls, args):
@@ -402,8 +379,7 @@ class DDash:
         if args.attach:
             subprocess.Popen(cmd, shell=True).wait()
         cmd = f'{cmd} -d'
-        stdout = cls._exec(cmd=cmd)
-        cls._stdout(output=stdout)
+        cls._exec(cmd=cmd)
 
     @classmethod
     def _down(cls, args):
@@ -421,8 +397,7 @@ class DDash:
             f'{ColorTag.GRAY}{ColorTag.ON_GRAY}   {project} {ColorTag.GRAY_ON_RED}  {ColorTag.RESET}'
             f'{ColorTag.ON_RED}{"DOWN":^10}{ColorTag.RED} {ColorTag.RESET}'
         )
-        stdout = cls._exec(cmd=cmd)
-        cls._stdout(output=stdout)
+        cls._exec(cmd=cmd)
 
     @classmethod
     def _run(cls, args):

@@ -33,6 +33,10 @@ pip install ddash
 |#|      date|version|
 |-|----------|-------|
 |1|2022/01/20| v0.0.0|
+|2|2022/01/31| v0.1.0|
+
+## 0.1.0
+- Adjust execute method, use `subprocess.Popen(cmd, shell=True).wait()` instead of `subprocess.check_output()` to avoid no reactions during a long term processing.
 
 ## 0.0.0
 - Add the following commands:

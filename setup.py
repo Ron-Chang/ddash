@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='ddash',
-    version='0.0.1',
+    version='0.1.0',
     author='Ron Chang',
     author_email='ron.hsien.chang@gmail.com',
     description=(
