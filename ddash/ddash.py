@@ -37,8 +37,7 @@ class DDash:
     `docker` and `docker-compose` cli tool, to specify and automatic apply with current work directory
 
     Setup following variable in you enviroment to make it permanently:
-
-    + DDASH_TIMEOUT: Execute cli timeout [default is None(never timeout)]
+    + DDASH_TABLE_FORMAT: Replace `docker ps` default format
     + DDASH_PROJECT_DELIMITER: Project delimiter for extracting prefix [default: '_'(underscore)]
     + DDASH_PROJECT_SPLIT_LIMIT: Project prefix word number for extracting prefix [default: 1]
     + DDASH_ROOT_PATH: Workspace [default: $HOME]
@@ -54,23 +53,22 @@ class DDash:
         _TERMINAL_SIZE_WIDTH = 90
 
     _DEFAULT_TABLE_FORMAT = 'table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Image}}'
-    _TABLE_FORMAT = os.environ.get('DDASH_TABLE_FORMAT', _DEFAULT_TABLE_FORMAT)
 
-    # default: None
-    _TIMEOUT = os.environ.get('DDASH_TIMEOUT')
+    # default: 'table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Image}}'
+    _TABLE_FORMAT = os.environ.get('DDASH_TABLE_FORMAT', _DEFAULT_TABLE_FORMAT)
     # default: '_'
     _PROJECT_DELIMITER = os.environ.get('DDASH_PROJECT_DELIMITER', '_')
     # default: 1
     _PROJECT_SPLIT_LIMIT = int(os.environ.get('DDASH_PROJECT_SPLIT_LIMIT', 1))
     # default: "{$HOME}"
     _ROOT_PATH = os.path.expanduser(os.environ.get('DDASH_ROOT_PATH', '~'))
-    # default: basename $PWD or Project {PREFIX}
-    _SUB_PATH = os.environ.get('DDASH_SUB_PATH')
+    # default: ''
+    _SUB_PATH = os.environ.get('DDASH_SUB_PATH', str())
     # default: 'service'
     _SATELLITE_SUFFIX = os.environ.get('DDASH_SATELLITE_SUFFIX', 'service')
     # default: 'docker-comopse.yml'
     _COMPOSE_FILENAME = os.environ.get('DDASH_COMPOSE_FILENAME', 'docker-compose.yml')
-    # default: 'docker-comopse.yml'
+    # default: 'bash'
     _DOCKER_EXEC_COMMAND = os.environ.get('DDASH_DOCKER_EXEC_COMMAND', 'bash')
 
     @classmethod

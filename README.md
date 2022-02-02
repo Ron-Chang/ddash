@@ -32,8 +32,13 @@ pip install ddash
 ## Update Logs
 |#|      date|version|
 |-|----------|-------|
-|1|2022/01/20| v0.0.0|
+|3|2022/02/02| v0.2.0|
 |2|2022/01/31| v0.1.0|
+|1|2022/01/20| v0.0.0|
+
+## 0.2.0
+- Removed useless param `DDASH_TIMEOUT`.
+- Fixed `_parse_sub_path` get unexpected value `None` due to `_SUB_PATH` has no default value.
 
 ## 0.1.0
 - Adjust execute method, use `subprocess.Popen(cmd, shell=True).wait()` instead of `subprocess.check_output()` to avoid no reactions during a long term processing.
