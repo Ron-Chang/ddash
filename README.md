@@ -32,9 +32,13 @@ pip install ddash
 ## Update Logs
 |#|      date|version|
 |-|----------|-------|
+|4|2022/04/14| v0.3.0|
 |3|2022/02/02| v0.2.0|
 |2|2022/01/31| v0.1.0|
 |1|2022/01/20| v0.0.0|
+
+## 0.3.0
+- Merge pull request from [Michael](https://github.com/cbb23021) to fix color display issue.
 
 ## 0.2.0
 - Removed useless param `DDASH_TIMEOUT`.
