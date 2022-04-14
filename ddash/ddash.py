@@ -10,12 +10,12 @@ import sys
 class ColorTag:
     RESET = '\x1b[0m'
 
-    RED = '\x1b[5;31;40m'
-    BLUE = '\x1b[5;34;40m'
-    CYAN = '\x1b[5;36;40m'
-    GRAY = '\x1b[5;37;40m'
-    GREEN = '\x1b[5;32;40m'
-    YELLOW = '\x1b[5;33;40m'
+    RED = '\x1b[0;31;48m'
+    BLUE = '\x1b[0;34;48m'
+    CYAN = '\x1b[0;36;48m'
+    GRAY = '\x1b[0;37;48m'
+    GREEN = '\x1b[0;32;48m'
+    YELLOW = '\x1b[0;33;48m'
 
     ON_RED = '\x1b[5;30;41m'
     ON_BLUE = '\x1b[5;30;44m'
@@ -30,6 +30,7 @@ class ColorTag:
     GRAY_ON_RED = '\x1b[3;37;41m'
     YELLOW_ON_RED = '\x1b[5;33;41m'
     YELLOW_ON_BLUE = '\x1b[5;33;44m'
+    BLUE_ON_BLACK = '\x1b[5;34;40m'
 
 
 class DDash:
@@ -331,7 +332,7 @@ class DDash:
     def _launch(cls, args):
         satellite_project = cls._get_satellite_project(project=args.project, suffix=args.suffix)
         cls._print(
-            f'{ColorTag.BLUE} {ColorTag.ON_BLUE} LAUNCH {ColorTag.YELLOW_ON_BLUE} {ColorTag.RESET}'
+            f'{ColorTag.BLUE_ON_BLACK} {ColorTag.ON_BLUE} LAUNCH {ColorTag.YELLOW_ON_BLUE} {ColorTag.RESET}'
             f'{ColorTag.ON_YELLOW} {satellite_project} {ColorTag.YELLOW}{ColorTag.RESET}'
         )
         root_path = args.root or cls._ROOT_PATH
